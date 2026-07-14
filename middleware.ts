@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server';
 const isPublicRoute = createRouteMatcher([
     "/sign-in",
     "/sign-up",
-    "/"
+    "/",
+    "/share/(.*)"
 ])
 const isPublicApiRoute = createRouteMatcher([
     "/api/videos"
@@ -29,7 +30,7 @@ export default clerkMiddleware((auth, req) => {
 
         // If the request is for a protected API and the user is not logged in
         if(isApiRequest && !isPublicApiRoute(req)){
-            return NextResponse.redirect(new URL("/sign-in", req.url))
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
         }
     }
     return NextResponse.next()

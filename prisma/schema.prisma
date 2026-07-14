@@ -13,6 +13,21 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model Folder {
+    id        String   @id @default(cuid())
+    name      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    videos    Video[]
+}
+
+model Activity {
+    id        String   @id @default(cuid())
+    action    String
+    details   String
+    createdAt DateTime @default(now())
+}
+
 model Video {
     id             String   @id @default(cuid())
     title          String
@@ -21,6 +36,21 @@ model Video {
     originalSize   String
     compressedSize String
     duration       Float
+    isFavorite     Boolean  @default(false)
+    summary        String?
+    tags           String[] @default([])
+    category       String?
+    folderId       String?
+    folder         Folder?  @relation(fields: [folderId], references: [id], onDelete: SetNull)
+    publicShare    Boolean  @default(false)
+    shareExpiresAt DateTime?
     createdAt      DateTime @default(now())
     updatedAt      DateTime @updatedAt
+}
+
+model User {
+    id        String   @id
+    email     String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
