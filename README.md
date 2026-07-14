@@ -11,8 +11,16 @@ MediaPilot AI is a modern full-stack SaaS application that enables users to secu
 ## 📸 Preview
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0d5047ff-9b6b-408e-a770-ffe3ca996a4b" />
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0071c3eb-b1cd-435b-8c95-5758f3884a97" />
 
-> *(Add screenshots here after uploading them to GitHub)*
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6c688868-1489-44d0-881d-97e8dd2ef800" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4d6d0a5a-b167-4391-bb47-2f1d99e4312b" />
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d9213919-3c2c-4b21-b450-11dd092828aa" />
+
+
+
 
 - Dashboard
 - Upload Media
