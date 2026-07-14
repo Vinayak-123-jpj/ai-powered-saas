@@ -1,4 +1,4 @@
-# 🚀 MediaPilot AI
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5e379c36-ff6e-4d73-8423-752babee003a" /># 🚀 MediaPilot AI
 
 > **AI-Powered Media Management SaaS Platform**
 
@@ -9,6 +9,8 @@ MediaPilot AI is a modern full-stack SaaS application that enables users to secu
 ---
 
 ## 📸 Preview
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0d5047ff-9b6b-408e-a770-ffe3ca996a4b" />
+
 
 > *(Add screenshots here after uploading them to GitHub)*
 
