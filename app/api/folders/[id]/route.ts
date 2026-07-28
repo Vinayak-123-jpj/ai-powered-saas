@@ -4,46 +4,54 @@ import prisma from "@/lib/prisma";
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const { name } = await request.json();
 
     if (!name || name.trim() === "") {
-      return NextResponse.json({ error: "Folder name is required" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Folder name is required" },
+        { status: 400 }
+      );
     }
 
     const updatedFolder = await prisma.folder.update({
       where: { id },
-      data: { name: name.trim() },
+      data: {
+        name: name.trim(),
+      },
     });
 
-    return NextResponse.json(updatedFolder, { status: 200 });
+    return NextResponse.json(updatedFolder);
   } catch (error) {
     console.error("Update folder error:", error);
-    return NextResponse.json({ error: "Failed to update folder" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to update folder" },
+      { status: 500 }
+    );
   }
 }
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const folder = await prisma.folder.findUnique({
@@ -51,14 +59,16 @@ export async function DELETE(
     });
 
     if (!folder) {
-      return NextResponse.json({ error: "Folder not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Folder not found" },
+        { status: 404 }
+      );
     }
 
     await prisma.folder.delete({
       where: { id },
     });
 
-    // Create activity log
     await prisma.activity.create({
       data: {
         action: "DELETE_FOLDER",
@@ -66,9 +76,14 @@ export async function DELETE(
       },
     });
 
-    return NextResponse.json({ message: "Folder deleted successfully" }, { status: 200 });
+    return NextResponse.json({
+      message: "Folder deleted successfully",
+    });
   } catch (error) {
     console.error("Delete folder error:", error);
-    return NextResponse.json({ error: "Failed to delete folder" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to delete folder" },
+      { status: 500 }
+    );
   }
 }
